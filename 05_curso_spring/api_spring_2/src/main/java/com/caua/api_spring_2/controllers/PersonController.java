@@ -3,6 +3,7 @@ import com.caua.api_spring_2.models.Person;
 import com.caua.api_spring_2.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,26 +11,27 @@ import java.util.List;
 @RequestMapping("/person")
 public class PersonController {
 
-    @Autowired
+    @Autowired()
     private PersonService personService;
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
-    public Person findById(@PathVariable String id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Person findById(@PathVariable Long id) {
         return personService.findById(id);
     }
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Person> findAll() {
         return personService.findAll();
     }
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Person create(@RequestBody Person person) {
         return personService.create(person);
     }
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.PUT)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Person update(@RequestBody Person person) {
         return personService.update(person);
     }
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         personService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -8,21 +8,24 @@ import java.util.Objects;
 @Table(name = "person")
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     @Column(nullable = false,length = 80)
     private String name;
+
     @Column(name = "last_name",nullable = false,length = 80)
     private String lastName;
+
     @Column(nullable = false,length = 100)
     private String address;
+
     @Column(nullable = false,length = 6)
     private String gender;
 
-    public Person() {
-
-    }
+    public Person() {}
 
     public Person(long id, String name, String lastName, String address, String gender) {
         this.id = id;
