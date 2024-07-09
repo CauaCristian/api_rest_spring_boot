@@ -1,4 +1,5 @@
 package com.caua.api_spring_2.services;
+import com.caua.api_spring_2.DTO.PersonDTO;
 import com.caua.api_spring_2.exceptions.ResourceNotFoundException;
 import com.caua.api_spring_2.models.Person;
 import com.caua.api_spring_2.repository.PersonRepository;
@@ -16,29 +17,29 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
 
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         logger.info("Find all Peaple!");
         return personRepository.findAll();
     }
 
-    public Person findById(Long id){
+    public PersonDTO findById(Long id){
         logger.info("Find Person by id: " + id);
         return personRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
     }
 
-    public Person create(Person person){
-        logger.info("Create Person: " + person);
-        return personRepository.save(person);
+    public PersonDTO create(PersonDTO dto){
+        logger.info("Create Person: " + dto);
+        return personRepository.save(dto);
     }
 
-    public Person update(Person person){
-        logger.info("Create Person: " + person);
-        Person entity = personRepository.findById(person.getId()).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
-        entity.setName(person.getName());
-        entity.setLastName(person.getLastName());
-        entity.setAddress(person.getAddress());
-        entity.setGender(person.getGender());
-        return personRepository.save(person);
+    public PersonDTO update(PersonDTO dto){
+        logger.info("Create Person: " + dto);
+        Person entity = personRepository.findById(dto.getId()).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
+        entity.setName(dto.getName());
+        entity.setLastName(dto.getLastName());
+        entity.setAddress(dto.getAddress());
+        entity.setGender(dto.getGender());
+        return personRepository.save(dto);
     }
 
     public void delete(Long id){

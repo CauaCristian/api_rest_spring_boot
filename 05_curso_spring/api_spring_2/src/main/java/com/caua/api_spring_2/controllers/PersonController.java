@@ -1,5 +1,5 @@
 package com.caua.api_spring_2.controllers;
-import com.caua.api_spring_2.models.Person;
+import com.caua.api_spring_2.DTO.PersonDTO;
 import com.caua.api_spring_2.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,22 +13,27 @@ public class PersonController {
 
     @Autowired()
     private PersonService personService;
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable Long id) {
+    public PersonDTO findById(@PathVariable Long id) {
         return personService.findById(id);
     }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonDTO> findAll() {
         return personService.findAll();
     }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person create(@RequestBody Person person) {
-        return personService.create(person);
+    public PersonDTO create(@RequestBody PersonDTO dto) {
+        return personService.create(dto);
     }
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person update(@RequestBody Person person) {
-        return personService.update(person);
+    public PersonDTO update(@RequestBody PersonDTO dto) {
+        return personService.update(dto);
     }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         personService.delete(id);
