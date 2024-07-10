@@ -6,15 +6,15 @@ import java.io.Serializable;
 import java.util.Objects;
 @Entity
 @Table(name = "person")
-public class Person implements Serializable {
+public class PersonModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false,length = 80)
-    private String name;
+    @Column(nullable = false,length = 80,name = "first_name")
+    private String firstName;
 
     @Column(name = "last_name",nullable = false,length = 80)
     private String lastName;
@@ -25,11 +25,11 @@ public class Person implements Serializable {
     @Column(nullable = false,length = 6)
     private String gender;
 
-    public Person() {}
+    public PersonModel() {}
 
-    public Person(long id, String name, String lastName, String address, String gender) {
+    public PersonModel(long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.gender = gender;
@@ -43,12 +43,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getLastName() {
@@ -79,12 +79,13 @@ public class Person implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id == person.id && Objects.equals(name, person.name) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
+        PersonModel personModel = (PersonModel) o;
+        return id == personModel.id && Objects.equals(firstName, personModel.firstName) && Objects.equals(lastName, personModel.lastName) && Objects.equals(address, personModel.address) && Objects.equals(gender, personModel.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender);
     }
+
 }
