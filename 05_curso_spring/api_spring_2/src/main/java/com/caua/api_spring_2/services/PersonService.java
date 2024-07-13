@@ -1,7 +1,9 @@
 package com.caua.api_spring_2.services;
-import com.caua.api_spring_2.DTO.PersonDTO;
+import com.caua.api_spring_2.DTO.v1.PersonDTO;
+import com.caua.api_spring_2.DTO.v2.PersonDTOV2;
 import com.caua.api_spring_2.exceptions.ResourceNotFoundException;
 import com.caua.api_spring_2.mapper.Mapper;
+import com.caua.api_spring_2.mapper.custom.PersonMapper;
 import com.caua.api_spring_2.models.PersonModel;
 import com.caua.api_spring_2.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class PersonService {
 
     @Autowired
     PersonRepository personRepository;
+    @Autowired
+    PersonMapper personMapper;
 
     public List<PersonDTO> findAll(){
         logger.info("Find all Peaple!");
@@ -34,7 +38,12 @@ public class PersonService {
         PersonDTO personDTO = Mapper.parseObject(personRepository.save(personModel), PersonDTO.class);
         return personDTO;
     }
-
+    public PersonDTOV2 createV2(PersonDTOV2 dto) {
+        logger.info("Create Person with v2: " + dto);
+        PersonModel personModel = personMapper.convertDTOToEntity(dto);
+        PersonDTOV2 personDTOV2 = personMapper.convertEntityToDTO(personRepository.save(personModel));
+        return personDTOV2;
+    }
     public PersonDTO update(PersonDTO dto){
         logger.info("Create Person: " + dto);
         PersonModel entity = personRepository.findById(dto.getId()).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
@@ -51,5 +60,6 @@ public class PersonService {
         PersonModel entity = personRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID"));
         personRepository.delete(entity);
     }
+
 
 }

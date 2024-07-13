@@ -1,0 +1,1 @@
+INSERT INTO `person` VALUES (1,'av couto','caua cristian','MALE','inocencio'),(2,'av couto','caua cristian','MALE','inocencio'),(3,'av couto','caua cristian','MALE','inocencio');

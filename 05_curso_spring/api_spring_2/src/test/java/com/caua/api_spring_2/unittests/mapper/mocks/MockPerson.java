@@ -2,7 +2,7 @@ package com.caua.api_spring_2.unittests.mapper.mocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.caua.api_spring_2.DTO.PersonDTO;
+import com.caua.api_spring_2.DTO.v1.PersonDTO;
 import com.caua.api_spring_2.models.PersonModel;
 
 public class MockPerson {

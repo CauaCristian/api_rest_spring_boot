@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import com.caua.api_spring_2.DTO.PersonDTO;
+import com.caua.api_spring_2.DTO.v1.PersonDTO;
 import com.caua.api_spring_2.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.caua.api_spring_2.mapper.Mapper;
 import com.caua.api_spring_2.models.PersonModel;
 
-public class DozerConverterTest {
+public class MapperConverterTest {
     
     MockPerson inputObject;
 
@@ -21,7 +21,7 @@ public class DozerConverterTest {
     }
 
     @Test
-    public void parseEntityToVOTest() {
+    public void parseEntityToDTOTest() {
         PersonDTO output = Mapper.parseObject(inputObject.mockEntity(), PersonDTO.class);
         assertEquals(Long.valueOf(0L), output.getId());
         assertEquals("First Name Test0", output.getFirstName());
@@ -31,7 +31,7 @@ public class DozerConverterTest {
     }
 
     @Test
-    public void parseEntityListToVOListTest() {
+    public void parseEntityListToDTOListTest() {
         List<PersonDTO> outputList = Mapper.parseListObjects(inputObject.mockEntityList(), PersonDTO.class);
         PersonDTO outputZero = outputList.get(0);
         
@@ -59,7 +59,7 @@ public class DozerConverterTest {
     }
 
     @Test
-    public void parseVOToEntityTest() {
+    public void parseDTOToEntityTest() {
         PersonModel output = Mapper.parseObject(inputObject.mockDTO(), PersonModel.class);
         assertEquals(Long.valueOf(0L), output.getId());
         assertEquals("First Name Test0", output.getFirstName());
@@ -69,7 +69,7 @@ public class DozerConverterTest {
     }
 
     @Test
-    public void parserVOListToEntityListTest() {
+    public void parserDTOListToEntityListTest() {
         List<PersonModel> outputList = Mapper.parseListObjects(inputObject.mockVOList(), PersonModel.class);
         PersonModel outputZero = outputList.get(0);
         

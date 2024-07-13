@@ -1,5 +1,4 @@
-package com.caua.api_spring_2.DTO;
-import jakarta.persistence.Column;
+package com.caua.api_spring_2.DTO.v1;
 
 import java.util.Objects;
 

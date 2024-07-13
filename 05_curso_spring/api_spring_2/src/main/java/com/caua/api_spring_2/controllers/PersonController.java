@@ -1,5 +1,6 @@
 package com.caua.api_spring_2.controllers;
-import com.caua.api_spring_2.DTO.PersonDTO;
+import com.caua.api_spring_2.DTO.v1.PersonDTO;
+import com.caua.api_spring_2.DTO.v2.PersonDTOV2;
 import com.caua.api_spring_2.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,6 +28,11 @@ public class PersonController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonDTO create(@RequestBody PersonDTO dto) {
         return personService.create(dto);
+    }
+
+    @PostMapping(value = "/v2",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public PersonDTOV2 createV2(@RequestBody PersonDTOV2 dto) {
+        return personService.createV2(dto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
