@@ -1,15 +1,21 @@
 package com.caua.api_spring_2.DTO.v1;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.Objects;
+@JsonPropertyOrder({"id","address","lastName","first_Name","gender"})
 public class PersonDTO {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @JsonProperty("first_Name")
     private String firstName;
     private String lastName;
     private String address;
+    @JsonIgnore
     private String gender;
     public PersonDTO() {}
 
